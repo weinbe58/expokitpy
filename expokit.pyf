@@ -1,0 +1,92 @@
+python module __user__routines_real
+    interface
+        subroutine matvec(n,x,y)
+          integer, intent(in) :: n
+          double precision dimension(n), intent(in) :: x
+          double precision dimension(n), intent(out) :: y
+        end subroutine
+    end iterface
+end python module __user__routines_real
+
+python module __user__routines_complex
+    interface
+        subroutine matvec(n,x,y)
+          integer, intent(in) :: n
+          complex*16 dimension(n), intent(in) :: x
+          complex*16 dimension(n), intent(out) :: y
+        end subroutine
+    end iterface
+end python module __user__routines_complex
+
+python module _expokit
+    interface 
+        subroutine dsexpv(n,m,t,v,w,tol,anorm,wsp,lwsp,iwsp,liwsp,matvec,itrace,iflag)
+          use __user__routines_real
+          integer intent(hide), depend(v) :: n = len(v)
+          integer intent(in) :: m
+          double precision intent(in) :: t
+          double precision dimension(n), intent(in) :: v
+          double precision dimension(n), intent(out) :: w
+          double precision intent(in,out) :: tol
+          double precision intent(in) :: anorm
+          double precision dimension(*), intent(in), check(len(wsp)>=7+n*(m+2)+5*(m+2)*(m+2)) :: wsp
+          integer intent(hide), depend(wsp) :: lwsp = len(wsp)
+          integer dimension(*), intent(in), check(len(iwsp)>=m+2) :: iwsp
+          integer intent(hide), depend(iwsp) :: liwsp = len(iwsp)
+          external matvec
+          integer intent(in) :: itrace
+          integer intent(out) :: iflag
+        end subroutine
+        subroutine dgexpv(n,m,t,v,w,tol,anorm,wsp,lwsp,iwsp,liwsp,matvec,itrace,iflag)
+          use __user__routines_real
+          integer intent(hide), depend(v) :: n = len(v)
+          integer intent(in) :: m
+          double precision intent(in) :: t
+          double precision dimension(n), intent(in) :: v
+          double precision dimension(n), intent(out) :: w
+          double precision intent(in,out) :: tol
+          double precision intent(in) :: anorm
+          double precision dimension(*), intent(in), check(len(wsp)>=7+n*(m+2)+5*(m+2)*(m+2)) :: wsp
+          integer intent(hide), depend(wsp) :: lwsp = len(wsp)
+          integer dimension(*), intent(in), check(len(iwsp)>=m+2) :: iwsp
+          integer intent(hide), depend(iwsp) :: liwsp = len(iwsp)
+          external matvec
+          integer intent(in) :: itrace
+          integer intent(out) :: iflag
+        end subroutine
+        subroutine zhexpv(n,m,t,v,w,tol,anorm,wsp,lwsp,iwsp,liwsp,matvec,itrace,iflag)
+          use __user__routines_complex
+          integer intent(hide), depend(v) :: n = len(v)
+          integer intent(in) :: m
+          double precision intent(in) :: t
+          complex*16 dimension(n), intent(in) :: v
+          complex*16 dimension(n), intent(out) :: w
+          double precision intent(in,out) :: tol
+          double precision intent(in) :: anorm
+          complex*16 dimension(*), intent(in), check(len(wsp)>=7+n*(m+2)+5*(m+2)*(m+2)) :: wsp
+          integer intent(hide), depend(wsp) :: lwsp = len(wsp)
+          integer dimension(*), intent(in), check(len(iwsp)>=m+2) :: iwsp
+          integer intent(hide), depend(iwsp) :: liwsp = len(iwsp)
+          external matvec
+          integer intent(in) :: itrace
+          integer intent(out) :: iflag
+        end subroutine
+        subroutine zgexpv(n,m,t,v,w,tol,anorm,wsp,lwsp,iwsp,liwsp,matvec,itrace,iflag)
+          use __user__routines_complex
+          integer intent(hide), depend(v) :: n = len(v)
+          integer intent(in) :: m
+          double precision intent(in) :: t
+          complex*16 dimension(n), intent(in) :: v
+          complex*16 dimension(n), intent(out) :: w
+          double precision intent(in,out) :: tol
+          double precision intent(in) :: anorm
+          complex*16 dimension(*), intent(in), check(len(wsp)>=7+n*(m+2)+5*(m+2)*(m+2)) :: wsp
+          integer intent(hide), depend(wsp) :: lwsp = len(wsp)
+          integer dimension(*), intent(in), check(len(iwsp)>=m+2) :: iwsp
+          integer intent(hide), depend(iwsp) :: liwsp = len(iwsp)
+          external matvec
+          integer intent(in) :: itrace
+          integer intent(out) :: iflag
+        end subroutine
+    end interface
+end python module _expokit
