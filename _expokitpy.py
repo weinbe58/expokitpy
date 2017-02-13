@@ -29,7 +29,7 @@ def py_dsexpv(v,A,anorm=None,wsp=None,iwsp=None,m=20,t=1.0,tol=0.0,return_work=F
     if anorm is None:
         anorm=onenormest(A)
     if wsp is None:
-        wsp = np.zeros(7+n*(m+2)+5*(m+2)*(m+2),dtype=np.complex128)
+        wsp = np.zeros(7+n*(m+2)+5*(m+2)*(m+2),dtype=np.float64)
     if iwsp is None:
         iwsp = np.zeros(m+2,dtype=np.int32)
 
@@ -63,7 +63,7 @@ def py_dgexpv(v,A,anorm=None,wsp=None,iwsp=None,m=20,t=1.0,tol=0.0,return_work=F
     if anorm is None:
         anorm=onenormest(A)
     if wsp is None:
-        wsp = np.zeros(7+n*(m+2)+5*(m+2)*(m+2),dtype=np.complex128)
+        wsp = np.zeros(7+n*(m+2)+5*(m+2)*(m+2),dtype=np.float64)
     if iwsp is None:
         iwsp = np.zeros(m+2,dtype=np.int32)
 
