@@ -33,6 +33,9 @@ def py_dsexpv(v,A,anorm=None,wsp=None,iwsp=None,m=20,t=1.0,tol=0.0,return_work=F
     if iwsp is None:
         iwsp = np.zeros(m+2,dtype=np.int32)
 
+    if return_work:
+        return dict(anorm=anorm,wsp=wsp,iwsp=iwsp,m=m,return_work=False)
+
     u,tol0,iflag0 = dsexpv(m,t,v,tol,anorm,wsp,iwsp,A.matvec,0)
 
 
@@ -42,10 +45,8 @@ def py_dsexpv(v,A,anorm=None,wsp=None,iwsp=None,m=20,t=1.0,tol=0.0,return_work=F
     elif iflag0 < 0:
         raise ExpokitError("bad input arguments")
 
-    if return_work:
-        return u, dict(anorm=anorm,wsp=wsp,iwsp=iwsp,m=m)
-    else:
-        return u
+
+    return u
 
 
 
@@ -67,6 +68,9 @@ def py_dgexpv(v,A,anorm=None,wsp=None,iwsp=None,m=20,t=1.0,tol=0.0,return_work=F
     if iwsp is None:
         iwsp = np.zeros(m+2,dtype=np.int32)
 
+    if return_work:
+        return dict(anorm=anorm,wsp=wsp,iwsp=iwsp,m=m,return_work=False)
+
     u,tol0,iflag0 = dgexpv(m,t,v,tol,anorm,wsp,iwsp,A.matvec,0)
 
 
@@ -76,10 +80,7 @@ def py_dgexpv(v,A,anorm=None,wsp=None,iwsp=None,m=20,t=1.0,tol=0.0,return_work=F
     elif iflag0 < 0:
         raise ExpokitError("bad input arguments")
 
-    if return_work:
-        return u, dict(anorm=anorm,wsp=wsp,iwsp=iwsp,m=m)
-    else:
-        return u
+    return u
 
 
 
@@ -102,6 +103,10 @@ def py_zhexpv(v,A,anorm=None,wsp=None,iwsp=None,m=20,t=1.0,tol=0.0,return_work=F
     if iwsp is None:
         iwsp = np.zeros(m+2,dtype=np.int32)
 
+    if return_work:
+        return dict(anorm=anorm,wsp=wsp,iwsp=iwsp,m=m,return_work=False)
+
+
     u,tol0,iflag0 = zhexpv(m,t,v,tol,anorm,wsp,iwsp,A.matvec,0)
 
 
@@ -111,10 +116,8 @@ def py_zhexpv(v,A,anorm=None,wsp=None,iwsp=None,m=20,t=1.0,tol=0.0,return_work=F
     elif iflag0 < 0:
         raise ExpokitError("bad input arguments")
 
-    if return_work:
-        return u, dict(anorm=anorm,wsp=wsp,iwsp=iwsp,m=m)
-    else:
-        return u
+
+    return u
 
 
 
@@ -137,6 +140,10 @@ def py_zgexpv(v,A,anorm=None,wsp=None,iwsp=None,m=20,t=1.0,tol=0.0,return_work=F
     if iwsp is None:
         iwsp = np.zeros(m+2,dtype=np.int32)
 
+    if return_work:
+        return dict(anorm=anorm,wsp=wsp,iwsp=iwsp,m=m,return_work=False)
+
+
     u,tol,iflag0 = zgexpv(m,t,v,tol,anorm,wsp,iwsp,A.matvec,0)
 
     if iflag0 > 0:
@@ -144,10 +151,8 @@ def py_zgexpv(v,A,anorm=None,wsp=None,iwsp=None,m=20,t=1.0,tol=0.0,return_work=F
     elif iflag0 < 0:
         raise ExpokitError("bad input arguments")
 
-    if return_work:
-        return u, dict(anorm=anorm,wsp=wsp,iwsp=iwsp,m=m)
-    else:
-        return u
+
+    return u
 
 
 
